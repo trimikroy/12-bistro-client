@@ -1,13 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+
     const navOptions = <>
         <li><Link to='/'>HOME</Link></li>
         <li><Link to='/menu'>OUR MENU</Link></li>
         <li><Link to='/order/salad'>ORDER FOOD</Link></li>
-        <li><Link to='/login'>LOGIN</Link></li>
-       
+        <li><Link to='/secret'>SECRET</Link></li>
+        <li><Link to='/'>
+            <button className="btn">
+                Inbox
+                <div className="badge badge-secondary">0</div>
+            </button>
+        </Link></li>
+        {
+            user ? <>
+
+                <button onClick={handleLogOut} className='btn btn-ghost'>LOG OUT</button>
+                <div className='w-10'>
+                    <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
+                </div>
+                {/* <span>{user?.displayName}</span> */}
+            </> : <>
+                <li><Link to='/login'>LOGIN</Link></li>
+            </>
+        }
 
     </>
     return (
@@ -40,8 +70,8 @@ const Navbar = () => {
                     <Link to='/' className="btn btn-ghost text-white text-xl">Bistro Boss</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu text-white menu-horizontal px-1">
-                       {navOptions}
+                    <ul className="menu items-center text-white menu-horizontal px-1">
+                        {navOptions}
                     </ul>
                 </div>
                 <div className="navbar-end">
