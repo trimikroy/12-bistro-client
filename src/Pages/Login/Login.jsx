@@ -13,6 +13,8 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.form?.pathname || '/';
+    console.log('state in the location login page',location.state)
+
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -92,11 +94,12 @@ const Login = () => {
 
 
                             <div className="form-control mt-4">
-                                <button disabled={disabled} className="btn bg-amber-600 text-white rounded-sm">Login</button>
+                                <button disabled={false} className="btn bg-amber-600 text-white rounded-sm">Login</button>
                             </div>
                         </form>
                         <div className='flex flex-col items-center my-4'>
-                            <p className='text-center  text-md font-semibold text-orange-600'><small>New Here?</small> <Link to="/signUp">Create An Account</Link></p>
+                            <p className='text-center  text-md font-semibold text-orange-600'><small>New Here?</small> <Link
+                             to="/signUp">Create An Account</Link></p>
                             <p className='font-semibold'>or sign in with</p>
                         </div>
                     </div>
